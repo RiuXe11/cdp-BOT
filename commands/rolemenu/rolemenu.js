@@ -4,18 +4,19 @@ const path = require('path');
 const colorManager = require(path.join(process.cwd(), 'utils', 'colors.js'));
 
 class RoleMenuBuilder {
-    constructor() {
+    constructor(guild) {
+        this.guild = guild; // Stocke la guild pour l'utiliser plus tard
         this.settings = {
             isMultiple: false,
             channel: null,
             messageType: null,
             messageContent: null,
             messageId: null,
-            style: 'Bouton', // 'Bouton', 'Sélecteur', ou 'Réaction'
+            style: 'Bouton',
             type: 'Donner/Retirer',
             requiredRoles: [],
             forbiddenRoles: [],
-            options: [] // Tableau d'options
+            options: []
         };
         this.menuMessage = null;
         this.isCreatingOption = false;
@@ -95,8 +96,8 @@ class RoleMenuBuilder {
         }
     }
 
-    createMainEmbed() {7
-        const serverColor = colorManager.getColor(message.guild.id);
+    createMainEmbed() {
+        const serverColor = colorManager.getColor(this.guild.id); // Utilise this.guild au lieu de message.guild
         const embed = new EmbedBuilder()
             .setTitle('⚙️ | Configuration du RoleMenu')
             .setDescription('Configurez le menu de rôles')
@@ -628,9 +629,10 @@ class RoleMenuBuilder {
     }
 
     async start(message) {
+        this.guild = message.guild; // Stocke la guild à partir du message
         this.menuMessage = await message.channel.send({
-            embeds: [this.createMainEmbed()], // Changé de createEmbed à createMainEmbed
-            components: this.createMainButtons() // Changé de createButtons à createMainButtons
+            embeds: [this.createMainEmbed()],
+            components: this.createMainButtons()
         });
     
         const collector = this.menuMessage.createMessageComponentCollector({
@@ -1023,7 +1025,6 @@ module.exports = {
             return message.reply('Vous n\'avez pas la permission de gérer les rôles !');
         }
     
-        // S'assure que le dossier data existe
         await RoleMenuBuilder.ensureDataDirectory();
     
         let roleMenu;
@@ -1033,10 +1034,11 @@ module.exports = {
             if (!roleMenu) {
                 return message.reply(`Aucun rolemenu trouvé avec l'ID ${args[0]}`);
             }
+            roleMenu.guild = message.guild; // Ajoute la guild au roleMenu chargé
         } else {
-            roleMenu = new RoleMenuBuilder();
+            roleMenu = new RoleMenuBuilder(message.guild); // Passe la guild au constructeur
             roleMenu.id = await RoleMenuBuilder.getNextId();
-            await roleMenu.save(); // Sauvegarde initiale
+            await roleMenu.save();
         }
         
         try {
