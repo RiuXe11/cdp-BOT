@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "settings": {
+    "isMultiple": false,
+    "channel": null,
+    "messageType": null,
+    "messageContent": null,
+    "messageId": null,
+    "style": "Bouton",
+    "type": "Donner/Retirer",
+    "requiredRoles": [],
+    "forbiddenRoles": [],
+    "options": []
+  }
+}
