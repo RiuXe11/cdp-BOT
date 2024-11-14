@@ -4,6 +4,27 @@ const fs = require("fs");
 const dotenv = require('dotenv');
 const path = require("path");
 
+const prefixConfigPath = path.join(__dirname, 'data/set-prefix/config.json');
+let config = { defaultPrefix: '!', currentPrefix: '!' };
+
+// Fonction pour charger la configuration du préfixe
+const loadPrefixConfig = () => {
+    try {
+        if (fs.existsSync(prefixConfigPath)) {
+            const data = fs.readFileSync(prefixConfigPath, 'utf8');
+            config = JSON.parse(data); 
+            return config;
+        }
+        return config;
+    } catch (error) {
+        console.error('Erreur lors du chargement de la configuration du préfixe:', error);
+        return config;
+    }
+};
+
+// Charge la configuration initiale
+loadPrefixConfig();
+
 dotenv.config();
 
 const client = new Client({ 
@@ -66,26 +87,33 @@ const loadEvents = (directory) => {
 loadCommands(path.join(__dirname, 'commands'));
 loadEvents(path.join(__dirname, 'events'));
 
-client.on('messageCreate', async message => {
-    if (!message.content.startsWith('!') || message.author.bot) return;
-
-    const args = message.content.slice(1).split(/ +/);
-    const commandName = args.shift().toLowerCase();
-
-    const command = client.commands.get(commandName);
-    if (!command) return;
-
-    // Vérification des permissions
-    if (!checkPermission(message.member, commandName)) {
-        return message.reply('❌ Vous n\'avez pas la permission d\'utiliser cette commande.');
+fs.watchFile(prefixConfigPath, (curr, prev) => {
+    if (curr.mtime !== prev.mtime) {
+        console.log('Configuration du préfixe modifiée, rechargement...');
+        loadPrefixConfig();
     }
+});
 
+client.on('messageCreate', async message => {
     try {
-        // Modifié ici : on passe le client en tant que deuxième argument
-        await command.execute(message, client, args);
+        config = loadPrefixConfig();
+        
+        if (!message.content.startsWith(config.currentPrefix) || message.author.bot) return;
+
+        const args = message.content.slice(config.currentPrefix.length).split(/ +/);
+        const commandName = args.shift().toLowerCase();
+
+        const command = client.commands.get(commandName);
+        if (!command) return;
+
+        if (!checkPermission(message.member, commandName)) {
+            return message.reply('❌ Vous n\'avez pas la permission d\'utiliser cette commande.');
+        }
+
+        await command.execute(message, args, client);
     } catch (error) {
-        console.error(error);
-        message.reply('Une erreur est survenue lors de l\'exécution de la commande.');
+        console.error('Erreur dans messageCreate:', error);
+        message.reply('Une erreur est survenue lors de l\'exécution de la commande.').catch(console.error);
     }
 });
 

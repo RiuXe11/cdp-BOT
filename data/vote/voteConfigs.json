@@ -1,10 +1,20 @@
 {
   "1177269675307061339": {
-    "linkTimeLimit": 300000,
-    "voteTimeLimit": 300000,
+    "linksDays": [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday"
+    ],
+    "voteDays": [
+      "saturday",
+      "sunday"
+    ],
     "showLoading": true,
-    "maxLinks": 3,
-    "linksChannel": "1292044508648964099",
-    "voteChannel": "1298920190066823168"
+    "maxLinks": 2,
+    "linksChannel": "1302944180535824406",
+    "voteChannel": "1302924963644440636",
+    "recurrence": "weekly"
   }
 }
