@@ -3,6 +3,7 @@ const { checkPermission } = require('./commands/moderation/permissionManager/per
 const fs = require("fs");
 const dotenv = require('dotenv');
 const path = require("path");
+const ffmpeg = require('ffmpeg-static');
 
 const prefixConfigPath = path.join(__dirname, 'data/set-prefix/config.json');
 let config = { defaultPrefix: '!', currentPrefix: '!' };
@@ -34,6 +35,8 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMembers
     ]
 });
 
@@ -116,5 +119,9 @@ client.on('messageCreate', async message => {
         message.reply('Une erreur est survenue lors de l\'exécution de la commande.').catch(console.error);
     }
 });
+
+const ffmpegPath = ffmpeg.replace(/\//g, '\\');
+process.env.FFMPEG_PATH = ffmpegPath;
+process.env.PATH = `${path.dirname(ffmpegPath)}${path.delimiter}${process.env.PATH}`;
 
 client.login(process.env.DISCORD_BOT_TOKEN);
