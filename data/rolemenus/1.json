@@ -1,0 +1,43 @@
+{
+  "id": 1,
+  "settings": {
+    "isMultiple": false,
+<<<<<<< HEAD
+    "channel": "1298679412241207296",
+    "messageType": "id",
+    "messageContent": null,
+    "messageId": "1299076544693796875",
+=======
+    "channel": null,
+    "messageType": null,
+    "messageContent": null,
+    "messageId": null,
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
+    "style": "Bouton",
+    "type": "Donner/Retirer",
+    "requiredRoles": [],
+    "forbiddenRoles": [],
+<<<<<<< HEAD
+    "options": [
+      {
+        "position": 1,
+        "roleId": "1220055842280181770",
+        "emoji": "🚲",
+        "text": "MxBikes",
+        "description": "",
+        "color": "Gris"
+      },
+      {
+        "position": 2,
+        "roleId": "1142399331731767306",
+        "emoji": "👥",
+        "text": "Mate",
+        "description": "",
+        "color": "Gris"
+      }
+    ]
+=======
+    "options": []
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
+  }
+}

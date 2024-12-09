@@ -2,5 +2,20 @@
   "1177269675307061339": {
     "default": "#ffffff",
     "current": "#ffffff"
+  },
+  "289177485877444611": {
+    "default": "#ffffff",
+<<<<<<< HEAD
+    "current": "#611212"
+  },
+  "1305965800925958164": {
+    "default": "#ffffff",
+    "current": "#ffffff"
+  },
+  "1313634865748508773": {
+    "default": "#ffffff",
+=======
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
+    "current": "#ffffff"
   }
 }

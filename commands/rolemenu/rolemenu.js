@@ -5,7 +5,7 @@ const colorManager = require(path.join(process.cwd(), 'utils', 'colors.js'));
 
 class RoleMenuBuilder {
     constructor(guild) {
-        this.guild = guild; // Stocke la guild pour l'utiliser plus tard
+        this.guild = guild;
         this.settings = {
             isMultiple: false,
             channel: null,
@@ -133,7 +133,7 @@ class RoleMenuBuilder {
     }
 
     createOptionEmbed() {
-        const serverColor = colorManager.getColor(message.guild.id);
+        const serverColor = colorManager.getColor(this.guild.id); // Utilise this.guild au lieu de message.guild
         return new EmbedBuilder()
             .setTitle('⚙️ | Configuration d\'une option')
             .setDescription('Configurez les paramètres de cette option')
@@ -1036,7 +1036,7 @@ module.exports = {
             }
             roleMenu.guild = message.guild; // Ajoute la guild au roleMenu chargé
         } else {
-            roleMenu = new RoleMenuBuilder(message.guild); // Passe la guild au constructeur
+            roleMenu = new RoleMenuBuilder(message.guild);
             roleMenu.id = await RoleMenuBuilder.getNextId();
             await roleMenu.save();
         }

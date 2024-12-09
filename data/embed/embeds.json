@@ -1,1 +1,21 @@
-[]
+[
+    {
+<<<<<<< HEAD
+        "title": "👋 | Ajoutez un rôle !",
+        "description": "Bonjour et bienvenue !\n\n> Pour continuer à accéder au discord, merci de bien choisir un rôle ci-dessous !\n\n> __Rôles :__\n> - 🏍️  : MxBikes\n> - 👥  : Mate",
+        "color": 6361618,
+        "author": {
+            "name": "cdp | BOT",
+            "icon_url": "https://cdn.discordapp.com/attachments/1299064982939635873/1299075940994912296/Fichier_2_1.png?ex=671be23f&is=671a90bf&hm=a753da227a7a9b40a7c61254652dbc6ef64e55871eade79fe41c5c43eecf3434&"
+        },
+        "footer": {
+            "text": "riuxe"
+        },
+        "timestamp": "2024-10-24T18:26:09.591Z"
+=======
+        "title": "ebfef",
+        "description": "qbelfjbqef",
+        "color": 39423
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
+    }
+]

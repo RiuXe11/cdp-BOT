@@ -203,8 +203,8 @@ module.exports = {
                             }
                         }
 
-                        if (buttonInteraction.customId === 'add_field') {
-                            await buttonInteraction.followUp({ content: 'Veuillez entrer le titre du field.', ephemeral: true });
+                        if (i.customId === 'add_field') {
+                            await i.reply({ content: 'Veuillez entrer le titre du field.', ephemeral: true });
                             const filter = response => response.author.id === message.author.id;
                         
                             // Collecter le titre du field
@@ -212,20 +212,42 @@ module.exports = {
                             if (collectedTitle.size > 0) {
                                 const fieldTitle = collectedTitle.first().content;
                         
-                                // Demander maintenant la description du field
-                                await buttonInteraction.followUp({ content: 'Veuillez entrer la description du field.', ephemeral: true });
+                                // Demander la description du field
+                                await i.followUp({ content: 'Veuillez entrer la description du field.', ephemeral: true });
                                 const collectedDescription = await message.channel.awaitMessages({ filter, max: 1, time: 30000 });
                                 
                                 if (collectedDescription.size > 0) {
                                     const fieldValue = collectedDescription.first().content;
-                                    tempEmbed.addFields({ name: fieldTitle, value: fieldValue, inline: true });
-                                    await editMessage.edit({ embeds: [tempEmbed] });
-                                    await buttonInteraction.followUp({ content: 'Le field a été ajouté.', ephemeral: true });
+                
+                                    // Demander si le field doit être en ligne
+                                    await i.followUp({ 
+                                        content: 'Souhaitez-vous que ce field soit en ligne avec les autres ? Répondez par "oui" ou "non".',
+                                        ephemeral: true 
+                                    });
+                                    
+                                    const collectedInline = await message.channel.awaitMessages({ filter, max: 1, time: 30000 });
+                                    
+                                    if (collectedInline.size > 0) {
+                                        const isInline = collectedInline.first().content.toLowerCase() === 'oui';
+                                        embed.addFields({ name: fieldTitle, value: fieldValue, inline: isInline });
+                                        await embedMessage.edit({ embeds: [embed], components: [row1, row2, row3] });
+                                        await i.followUp({ 
+                                            content: `Le field a été ajouté ${isInline ? 'en ligne' : 'non aligné'}.`, 
+                                            ephemeral: true 
+                                        });
+                                    } else {
+                                        await i.followUp({ 
+                                            content: 'Aucune réponse reçue pour l\'alignement, le field sera ajouté par défaut en ligne.', 
+                                            ephemeral: true 
+                                        });
+                                        embed.addFields({ name: fieldTitle, value: fieldValue, inline: true });
+                                        await embedMessage.edit({ embeds: [embed], components: [row1, row2, row3] });
+                                    }
                                 } else {
-                                    await buttonInteraction.followUp({ content: 'La description du field n\'a pas été fournie à temps.', ephemeral: true });
+                                    await i.followUp({ content: 'La description du field n\'a pas été fournie à temps.', ephemeral: true });
                                 }
                             } else {
-                                await buttonInteraction.followUp({ content: 'Le titre du field n\'a pas été fourni à temps.', ephemeral: true });
+                                await i.reply({ content: 'Le titre du field n\'a pas été fourni à temps.', ephemeral: true });
                             }
                         }
                         

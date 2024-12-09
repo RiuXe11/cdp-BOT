@@ -1,10 +1,46 @@
 {
   "1177269675307061339": {
-    "linkTimeLimit": 300000,
-    "voteTimeLimit": 300000,
+    "linksDays": [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday"
+    ],
+    "voteDays": [
+      "saturday",
+      "sunday"
+    ],
     "showLoading": true,
+<<<<<<< HEAD
     "maxLinks": 3,
     "linksChannel": "1292044508648964099",
     "voteChannel": "1298920190066823168"
+  },
+  "289177485877444611": {
+    "linkTimeLimit": 432000000,
+    "voteTimeLimit": 172800000,
+    "showLoading": true,
+    "maxLinks": 2,
+    "linksChannel": "1304058757457903626",
+    "voteChannel": "1299055561769353266",
+    "linksDays": [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday"
+    ],
+    "voteDays": [
+      "saturday",
+      "sunday"
+    ],
+    "messageTemplate": "## 👋・Hello <@&1220055842280181770> !\n\n> ✅ | Une nouvelle phase de vote commence ! \n> ⌛ | Vous avez jusqu'à **{lastDayLink} {lastHourLink}** pour envoyer vos liens (__max {maxLink} liens par personne__)\n> \n> 📅 | Phase de liens active : **{dayLink}**\n> 📅 | Phase de votes active : **{dayVote}**",
+=======
+    "maxLinks": 2,
+    "linksChannel": "1302944180535824406",
+    "voteChannel": "1302924963644440636",
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
+    "recurrence": "weekly"
   }
 }

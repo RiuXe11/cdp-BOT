@@ -1,8 +1,60 @@
 {
+<<<<<<< HEAD
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord avec fonctionnalités musicales",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "music",
+    "discord.js"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5",
-    "mongoose": "^8.7.2",
-    "winston": "^3.15.0"
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.16.1",
+    "@distube/yt-dlp": "^1.1.3",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "ffmpeg-static": "^5.2.0",
+    "figlet": "^1.8.0",
+    "google-auth-library": "^9.15.0",
+    "google-spreadsheet": "^4.1.4",
+    "mongoose": "^8.8.3",
+    "os": "^0.1.2",
+    "play-dl": "^1.9.7",
+    "sodium-native": "^4.0.4",
+    "xlsx": "^0.18.5",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.x"
   }
+=======
+    "dependencies": {
+        "@discordjs/opus": "^0.9.0",
+        "@discordjs/voice": "^0.17.0",
+        "aria2": "^4.1.2",
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.4.5",
+        "ffmpeg-static": "^5.2.0",
+        "libsodium-wrappers": "^0.7.15",
+        "play-dl": "^1.9.7",
+        "sodium-native": "^4.3.1",
+        "youtube-dl-exec": "^3.0.10"
+    }
+>>>>>>> 6cdedf7dda329b114f6b38baceebd76b6235c97a
 }
